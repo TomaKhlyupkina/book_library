@@ -1,0 +1,12 @@
+.customButton {
+    padding: 5px;
+    margin: 5px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.customButton:hover {
+    background-color: rgb(242, 240, 237);
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+}

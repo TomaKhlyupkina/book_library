@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./App.css";
+import CustomInput from "./components/UI/input/CustomInput";
+import CustomButton from "./components/UI/button/CustomButton";
 
 function App() {
     const [data, setData] = React.useState(null);
@@ -22,32 +24,32 @@ function App() {
         setBook({name: "", author: "", date: ""})
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         fetch("/api")
             .then((res) => res.json())
-            .then((data) => setData(data.message));
-    }, []);
+            .then((data) => setData(data.message))
+    }, [])
 
     return (
         <div>
             <header>
                 <form>
-                    <input
+                    <CustomInput
                         placeholder={"Book's name"}
                         value={book.name}
                         onChange={e => setBook({...book, name: e.target.value})}
                     />
-                    <input
+                    <CustomInput
                         placeholder={"Author"}
                         value={book.author}
                         onChange={e => setBook({...book, author: e.target.value})}
                     />
-                    <input
+                    <CustomInput
                         placeholder={"Publication date"}
                         value={book.date}
                         onChange={e => setBook({...book, date: e.target.value})}
                     />
-                    <button onClick={addBookToDB}>Add book</button>
+                    <CustomButton onClick={addBookToDB}>Add book</CustomButton>
                 </form>
                 <p>{!data ? "Loading..." : data}</p>
             </header>
