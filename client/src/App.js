@@ -1,56 +1,40 @@
-import React from "react";
+import React, {useMemo} from "react";
 import "./App.css";
+import BookList from "./components/bookList/BookList";
+import AddBookForm from "./components/AddBookForm";
 
 function App() {
-    const [data, setData] = React.useState(null);
-    const [book, setBook] = React.useState({name: "", author: "", date: ""})
+    const [data, setData] = React.useState([]);
 
-    const addBookToDB = (e) => {
-        e.preventDefault()
+    const addBookToDB = (newBook) => {
+        setData([...data, newBook])
         let response = fetch("/add_book", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify(book)
+            body: JSON.stringify(newBook)
         })
         response.then((res) => {
             if (!res.ok) {
                 console.log("ERROR: " + res.statusText)
             }
         })
-        setBook({name: "", author: "", date: ""})
     }
 
-    React.useEffect(() => {
-        fetch("/api")
+    useMemo(() => {
+        fetch("/book_list")
             .then((res) => res.json())
-            .then((data) => setData(data.message));
-    }, []);
+            .then((data) => { setData(JSON.parse(data)) })
+    }, [])
 
     return (
-        <div>
-            <header>
-                <form>
-                    <input
-                        placeholder={"Book's name"}
-                        value={book.name}
-                        onChange={e => setBook({...book, name: e.target.value})}
-                    />
-                    <input
-                        placeholder={"Author"}
-                        value={book.author}
-                        onChange={e => setBook({...book, author: e.target.value})}
-                    />
-                    <input
-                        placeholder={"Publication date"}
-                        value={book.date}
-                        onChange={e => setBook({...book, date: e.target.value})}
-                    />
-                    <button onClick={addBookToDB}>Add book</button>
-                </form>
-                <p>{!data ? "Loading..." : data}</p>
-            </header>
+        <div className={"App"}>
+            <AddBookForm addBook={addBookToDB}/>
+            {(!data.length) &&
+                <p>Loading...</p>
+            }
+            <BookList books={data}/>
         </div>
     );
 }
