@@ -1,8 +1,6 @@
 const express = require("express");
 const fs = require("fs");
-
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 app.use(express.json())
 
@@ -36,8 +34,8 @@ const readBooksFromDB = () => {
 
 readBooksFromDB()
 
-app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
+app.get("/book_list", (req, res) => {
+    res.json(JSON.stringify(books));
 });
 
 app.post("/add_book", (req, res) => {
@@ -47,7 +45,6 @@ app.post("/add_book", (req, res) => {
     }
     books.push(req.body)
     addAllBooksToDb()
-
     res.status(200).end()
 })
 
