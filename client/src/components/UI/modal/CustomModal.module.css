@@ -1,0 +1,22 @@
+.custom_modal {
+    position: fixed;
+    display: none;
+    background: rgba(0, 0, 0, 0.4);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.custom_modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom_modal_content {
+    background-color: white;
+    min-width: 200px;
+    padding: 20px;
+    width: 35%;
+}

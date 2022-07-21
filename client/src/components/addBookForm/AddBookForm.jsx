@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import CustomInput from "./UI/input/CustomInput";
-import CustomButton from "./UI/button/CustomButton";
+import CustomInput from "../UI/input/CustomInput";
+import CustomButton from "../UI/button/CustomButton";
+import classes from "./AddBookForm.module.css"
 
 const AddBookForm = ({addBook}) => {
     const [book, setBook] = useState({name: "", author: "", date: ""})
@@ -12,7 +13,7 @@ const AddBookForm = ({addBook}) => {
         setBook({name: "", author: "", date: ""})
     }
     return (
-        <form>
+        <form className={classes.add_book_form}>
             <CustomInput
                 placeholder={"Book's name"}
                 value={book.name}
