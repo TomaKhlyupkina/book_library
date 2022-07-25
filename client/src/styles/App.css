@@ -1,5 +1,5 @@
 html, body {
-    height: 100%;
+    /*height: 100%;*/
     background-color: rgb(240, 240, 240);
 }
 
@@ -10,11 +10,16 @@ html, body {
 }
 
 #root {
-    height: 100%;
-    width: 100%;
+    width: 100vw;
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
 
 .books {
+    padding: 20px;
+}
+
+.user_account {
     padding: 20px;
 }

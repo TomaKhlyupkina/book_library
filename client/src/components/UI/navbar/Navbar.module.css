@@ -1,5 +1,4 @@
 .navbar {
-    overflow: scroll;
     height: 50px;
     background-color: rgb(235, 235, 235);
     border-bottom: 1px solid rgba(250, 250, 250, 0.9);
